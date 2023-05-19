@@ -1,5 +1,3 @@
-// ContactList.jsx
-
 import React, { Component } from 'react';
 
 class ContactList extends Component {
@@ -40,6 +38,7 @@ class ContactList extends Component {
       <form onSubmit={this.handleSubmit}>
         <label>
           Name:
+          <br />
           <input
             type="text"
             name="name"
@@ -50,9 +49,10 @@ class ContactList extends Component {
             onChange={this.handleNameChange}
           />
         </label>
-
+        <br />
         <label>
           Number:
+          <br />
           <input
             type="number"
             name="number"
@@ -61,7 +61,7 @@ class ContactList extends Component {
             onChange={this.handleNumberChange}
           />
         </label>
-
+        <br />
         <button type="submit">Add Contact</button>
       </form>
     );
