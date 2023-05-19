@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/react-homework-template/static/css/main.c0951b49.css",
-    "main.js": "/react-homework-template/static/js/main.ffc7c850.js",
+    "main.js": "/react-homework-template/static/js/main.2bad83a2.js",
     "index.html": "/react-homework-template/index.html",
     "main.c0951b49.css.map": "/react-homework-template/static/css/main.c0951b49.css.map",
-    "main.ffc7c850.js.map": "/react-homework-template/static/js/main.ffc7c850.js.map"
+    "main.2bad83a2.js.map": "/react-homework-template/static/js/main.2bad83a2.js.map"
   },
   "entrypoints": [
     "static/css/main.c0951b49.css",
-    "static/js/main.ffc7c850.js"
+    "static/js/main.2bad83a2.js"
   ]
 }
