@@ -1,0 +1,16 @@
+.form {
+  flex-direction: column;
+  display: flex;
+  border: 1px solid black;
+}
+.form__label {
+  padding: 5px;
+}
+.form__label p {
+  margin: 0;
+}
+.form__button {
+  padding: 5px;
+  border-radius: 0;
+  font-size: large;
+}

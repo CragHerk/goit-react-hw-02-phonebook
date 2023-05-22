@@ -1,43 +1,52 @@
 // ContactForm.jsx
 import React, { useState } from 'react';
+import styles from './ContactForm.module.css';
 
 const ContactForm = ({ onAddContact }) => {
-  const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+  const [formData, setFormData] = useState({ name: '', number: '' });
 
   const handleSubmit = event => {
     event.preventDefault();
-    if (name.trim() === '' || number.trim() === '') {
+    if (formData.name.trim() === '' || formData.number.trim() === '') {
       return;
     }
-    onAddContact(name.trim(), number.trim());
-    setName('');
-    setNumber('');
+    onAddContact(formData.name.trim(), formData.number.trim());
+    setFormData({ name: '', number: '' });
+  };
+
+  const handleInputChange = event => {
+    const { name, value } = event.target;
+    setFormData(prevFormData => ({
+      ...prevFormData,
+      [name]: value,
+    }));
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Name
-        <br />
+    <form onSubmit={handleSubmit} className={styles.form}>
+      <label className={styles.form__label}>
+        <p>Name</p>
         <input
           type="text"
-          value={name}
-          onChange={event => setName(event.target.value)}
+          name="name"
+          value={formData.name}
+          onChange={handleInputChange}
         />
       </label>
-      <br />
-      <label>
-        Number
-        <br />
+
+      <label className={styles.form__label}>
+        <p>Number</p>
         <input
           type="text"
-          value={number}
-          onChange={event => setNumber(event.target.value)}
+          name="number"
+          value={formData.number}
+          onChange={handleInputChange}
         />
       </label>
-      <br />
-      <button type="submit">Add Contact</button>
+
+      <button type="submit" className={styles.form__button}>
+        Add Contact
+      </button>
     </form>
   );
 };

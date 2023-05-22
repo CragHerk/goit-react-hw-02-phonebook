@@ -1,11 +1,10 @@
-// Filter.jsx
 import React from 'react';
+import styles from './Filter.module.css';
 
 const Filter = ({ filter, onFilterChange }) => {
   return (
-    <div>
-      Filter contacts
-      <br />
+    <div className={styles.filter}>
+      <p>Filter contacts</p>
       <input
         type="text"
         value={filter}
