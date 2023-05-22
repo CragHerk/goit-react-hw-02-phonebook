@@ -1,71 +1,69 @@
-import React, { Component } from 'react';
 import { nanoid } from 'nanoid';
+import React, { useState } from 'react';
+import ContactForm from '../ContactForm/ContactForm';
+import Filter from '../Filter/Filter';
 import ContactList from '../ContactList/ContactList';
 
-class Main extends Component {
-  state = {
-    contacts: [
-      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-    ],
-    filter: '',
-  };
+const Main = () => {
+  const [contacts, setContacts] = useState([
+    { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
+    { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
+    { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
+    { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
+  ]);
+  const [filter, setFilter] = useState('');
 
-  handleAddContact = (name, number) => {
-    const { contacts } = this.state;
+  const handleAddContact = (name, number) => {
+    const existingContact = contacts.find(
+      contact =>
+        contact.name.toLowerCase() === name.toLowerCase() ||
+        contact.number === number
+    );
 
-    // Tworzenie nowego kontaktu
+    if (existingContact) {
+      alert('Ten kontakt już istnieje w książce telefonicznej.');
+      return;
+    }
+
     const newContact = {
       id: nanoid(),
       name: name,
       number: number,
     };
 
-    // Dodawanie nowego kontaktu do listy
-    this.setState({
-      contacts: [...contacts, newContact],
-    });
+    setContacts(prevContacts => [...prevContacts, newContact]);
   };
 
-  handleFilterChange = event => {
-    this.setState({ filter: event.target.value });
+  const handleDeleteContact = id => {
+    setContacts(prevContacts =>
+      prevContacts.filter(contact => contact.id !== id)
+    );
   };
 
-  render() {
-    const { contacts, filter } = this.state;
+  const handleFilterChange = value => {
+    setFilter(value);
+  };
 
-    // Filtruj kontakty na podstawie wartości pola wyszukiwania
-    const filteredContacts = contacts.filter(contact =>
-      contact.name.toLowerCase().includes(filter.toLowerCase())
-    );
+  const filteredContacts = contacts.filter(contact =>
+    contact.name.toLowerCase().includes(filter.toLowerCase())
+  );
 
-    return (
-      <div>
-        <h1>Contact App</h1>
+  return (
+    <div className="container">
+      <h1>Phonebook</h1>
 
-        <ContactList onAddContact={this.handleAddContact} />
+      <ContactForm onAddContact={handleAddContact} />
 
-        <div>
-          <h3>Contacts</h3>
-          <input
-            type="text"
-            placeholder="Search contacts..."
-            value={filter}
-            onChange={this.handleFilterChange}
-          />
-          <ul>
-            {filteredContacts.map(contact => (
-              <li key={contact.id}>
-                {contact.name} - {contact.number}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-    );
-  }
-}
+      <h2>Contacts</h2>
+
+      <Filter filter={filter} onFilterChange={handleFilterChange} />
+
+      <ContactList
+        contacts={filteredContacts}
+        onDeleteContact={handleDeleteContact}
+      />
+    </div>
+  );
+};
 
 export default Main;
