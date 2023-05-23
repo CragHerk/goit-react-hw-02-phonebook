@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import ContactForm from '../ContactForm/ContactForm';
 import Filter from '../Filter/Filter';
 import ContactList from '../ContactList/ContactList';
+import { ToastContainer } from 'react-toastify';
 
 const Main = () => {
   const [contacts, setContacts] = useState([
@@ -62,6 +63,7 @@ const Main = () => {
         contacts={filteredContacts}
         onDeleteContact={handleDeleteContact}
       />
+      <ToastContainer />
     </div>
   );
 };
